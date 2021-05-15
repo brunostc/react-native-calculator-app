@@ -12,16 +12,27 @@ const initialState = {
 export default class App extends Component {
   state = { ...initialState };
   
+  /**
+   * Clears the display and the memory.
+   */
   clearMemory = () => {
     this.setState({ displayValue: '0' });
     this.setState({ values: [0, 0] });
   };
 
+  /**
+   * Sets the next operation.
+   * @param {string} op operation
+   */
   setOperation = (op) => {
     this.setState({ operation: op });
     this.setState({ displayValue: op });
   };
 
+  /**
+   * Executes the operation
+   * @param {string} op mathemathical operators ('+', '-', '*', '/')
+   */
   executeOperation = (op) => {
     let v1 = Number(this.state.values[0]);
     let v2 = Number(this.state.values[1]);
@@ -57,6 +68,9 @@ export default class App extends Component {
     }
   }
 
+  /**
+   * Calculates the result
+   */
   getResult = () => {
     const op = this.state.operation; 
 
@@ -70,6 +84,11 @@ export default class App extends Component {
     this.setState({ values: [result, 0] })
   };
 
+  /**
+   * Inserts a value into the display and the memory
+   * @param {string} digit last digit typed.
+   * @param {boolean} secondValue if it is the second operation value or not
+   */
   insertValue = (digit, secondValue) => {
     let v1 = this.state.values[0].toString();
     let v2 = this.state.values[1].toString();
@@ -128,6 +147,10 @@ export default class App extends Component {
     }
   };
 
+  /**
+   * Adds a digit to the display.
+   * @param {string} digit pressed digit.
+   */
   addDigit = (digit) => {
     const op = this.state.operation;
 
@@ -138,6 +161,9 @@ export default class App extends Component {
     }
   };
 
+  /**
+   * Deletes the last digit from the display and memory
+   */
   deleteLastDigit = () => {
     let values = this.state.values;
 
