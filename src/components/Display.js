@@ -2,12 +2,15 @@ import React from 'react';
 import { 
     StyleSheet,
     Text,
+    Dimensions,
     View
 } from 'react-native';
 
 const styles = StyleSheet.create({
     display: {
         flex: 1,
+        height: Dimensions.get('window').width / 4,
+        width: Dimensions.get('window').width,
         padding: 20,
         backgroundColor: 'rgba(0,0,0,0.6)',
         flexDirection: 'row',
