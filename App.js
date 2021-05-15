@@ -66,7 +66,7 @@ export default class App extends Component {
       return;
     }
 
-    const result = this.executeOperation(op);
+    let result = this.executeOperation(op);
 
     this.setState({ displayValue: result })
     this.setState({ values: [result, 0] })
@@ -140,12 +140,49 @@ export default class App extends Component {
     }
   };
 
+  deleteLastDigit = () => {
+    let values = this.state.values;
+
+    if (values[0] == 0 && values[1] == 0) {
+      return;
+    }
+
+    if (values[0] != 0 && values[1] == 0) {
+      if (values[0].toString().length == 1) {
+        this.setState({ displayValue: 0 })
+        this.setState({ values: [0, 0] })
+      } else {
+        let newValue = values[0].toString().slice(0, -1);
+        
+        this.setState({ displayValue: newValue })
+        this.setState({ values: [newValue, 0] })
+      }
+      
+      return;
+    }
+
+    if (values[0] != 0 && values[1] != 0) {
+      if (values[1].length == 1) {
+        this.setState({ displayValue: 0 })
+        this.setState({ values: [values[0], 0] })
+      } else {
+        let newValue = values[1].slice(0, -1);
+        
+        this.setState({ displayValue: newValue })
+        this.setState({ values: [values[0], newValue] })
+      }
+      
+      return;
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Display value={this.state.displayValue} ></Display>
         <View style={styles.buttons}>
-          <Button label='AC' triple onClick={this.clearMemory} />
+          <Button label='AC' double onClick={this.clearMemory} />
+          <Button label='C' operation onClick={this.deleteLastDigit} />
           <Button label='/' operation onClick={() => this.setOperation('/')} />
         </View>
         <View style={styles.buttons}>
