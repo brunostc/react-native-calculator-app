@@ -5,10 +5,8 @@ import Display from './src/components/Display';
 
 const initialState = {
   displayValue: '0',
-  clearDisplay: false,
   operation: null,
   values: [0, 0],
-  currentValue: 0,
 };
 
 export default class App extends Component {
